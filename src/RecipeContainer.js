@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import data from './data/data.json'; 
 import RecipeCard from "./RecipeCard"; 
 import {random} from './helpers'
+import {Container, Row, Col, Button} from 'react-bootstrap'; 
 
 class RecipeContainer extends Component {
     static defaultProps = {
@@ -31,19 +32,23 @@ class RecipeContainer extends Component {
 
     render() {
         return (
-            <div>
+            <Container>
                 {/*TOGGLE THESE TEXT WHEN CLICKING THE BUTTON*/}
                 <h1>Want to make something new today?</h1>
                 <p>Check the button below to find out!</p>
-                {this.state.recipe && this.state.recipe.map(r => ( 
-                    <div>
-                    <h1>Choose one of these recipes!</h1>
-                    <RecipeCard data={r} />
-                    </div>
-                ))}
-                   {/*CHANGE TEXT OF BUTTON TO SEE DIFFERENT OPTIONS*/}
-                <button onClick={this.handleClick}>Click me!</button>
-            </div>
+                <Row>
+                    {this.state.recipe && this.state.recipe.map(r => ( 
+                        <Col xs={3} className="mb-5" key={`${r.name}`}>
+                            <RecipeCard data={r} />
+                        </Col>
+                    ))}
+                </Row>
+                {/*CHANGE TEXT OF BUTTON TO SEE DIFFERENT OPTIONS*/}
+                <Button
+                    onClick={this.handleClick}>
+                    Click me!
+                </Button>
+            </Container>
             )
     }
     

@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
+import {Card, Badge} from 'react-bootstrap';
 
 class RecipeCard extends Component {
     render() {
         return(
-            <div>
-                <p>Recipe Name: {this.props.data.name}</p>
-                <img src={this.props.data.image} alt={this.props.data.name}/> 
-                <p>Ingredients:</p>
-                <ul>
-                    {/*list the ingredients here, ADD URL OR LI */}
-                    <li>{this.props.data.ingredients}</li>
-                    </ul>
-                <p>Instructions</p>
-            </div>
+            <Card className="h-100 shadow-sm bg-white rounded">
+                <Card.Title className="mb-0 font-weight-bold">{this.props.data.name}</Card.Title>
+                <Card.Img variant="top" src={this.props.data.image} alt={this.props.data.name}/> 
+                <Card.Body className="d-flex flex-column">
+                    <div className="d-flex mb-2 justify-content-between">
+                    Ingredients: {this.props.data.ingredients}
+                    </div>
+                </Card.Body>
+            </Card>
         )
     }
 }
