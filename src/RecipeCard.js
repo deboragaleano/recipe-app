@@ -23,6 +23,7 @@ class RecipeCard extends Component {
                         variant="secondary"
                         block
                         href={this.props.data.url}
+                        target="_blank"
                     >
                     Learn more
                     </Button>
