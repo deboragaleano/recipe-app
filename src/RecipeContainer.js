@@ -1,7 +1,9 @@
 import React, { Component } from 'react'; 
 import data from './data/data.json'; 
 import RecipeCard from "./RecipeCard"; 
-import {random} from './helpers'
+import {random} from './helpers';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import {Container, Row, Col, Button, Navbar, Jumbotron} from 'react-bootstrap'; 
 
 class RecipeContainer extends Component {
@@ -39,7 +41,7 @@ class RecipeContainer extends Component {
                 <Jumbotron>
                 {/*TOGGLE THESE TEXT WHEN CLICKING THE BUTTON*/}
                 <h1>Make a new recipe today!</h1>
-                    <p>Learn how to cook something new. Check a random choice :) </p>
+                <p>Learn how to cook something new. Check a random choice below! <FontAwesomeIcon icon={faThumbsUp}/></p>
                     <p>
                     <Row>
                         {this.state.recipe && this.state.recipe.map(r => ( 
