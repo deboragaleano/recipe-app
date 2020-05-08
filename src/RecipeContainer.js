@@ -7,18 +7,19 @@ class RecipeContainer extends Component {
     static defaultProps = {
         recipes: data
     }
-    
+
     constructor(props) {
         super(props);
-        this.state = {
-            recipe: random(this.props.recipes)
-        }
+        this.state = {recipe: random(this.props.recipes)}
         this.handleClick = this.handleClick.bind(this); 
-    }
+    } 
 
     generate() {
-        //ADD THAT IT DOESN'T SHOW THE SAME ITEM WITH DO AND WHILE WEBDEV
-        const newRecipe = random(this.props.recipes); 
+        let newRecipe;
+        //to avoid getting the same recipe after another 
+        do {
+            newRecipe = random(this.props.recipes);
+        } while (newRecipe === this.state.recipe);
         this.setState({
             recipe: newRecipe
         })
