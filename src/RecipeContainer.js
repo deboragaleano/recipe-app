@@ -5,23 +5,23 @@ import {random} from './helpers'
 
 class RecipeContainer extends Component {
     static defaultProps = {
-        recipes: data
+        recipes: data,
+        numRecipes: 4
     }
 
     constructor(props) {
         super(props);
-        this.state = {recipe: random(this.props.recipes)}
+        this.state = {
+            recipe: []
+        }
         this.handleClick = this.handleClick.bind(this); 
     } 
 
     generate() {
-        let newRecipe;
-        //to avoid getting the same recipe after another 
-        do {
-            newRecipe = random(this.props.recipes);
-        } while (newRecipe === this.state.recipe);
+        let randomRecipes = Array.from({length: this.props.numRecipes}, () => random(this.props.recipes));
+        let UniqueRecipes = [...new Set(randomRecipes)]
         this.setState({
-            recipe: newRecipe
+            recipe: UniqueRecipes
         })
     }
 
@@ -32,7 +32,9 @@ class RecipeContainer extends Component {
     render() {
         return (
             <div>
-                <RecipeCard data={this.state.recipe}/> 
+                {this.state.recipe.map(r => ( 
+                    <RecipeCard data={r} />
+                ))}
                 <button onClick={this.handleClick}>Check other options!</button>
             </div>
             )
