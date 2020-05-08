@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 class RecipeCard extends Component {
     render() {
         return(
-            <div>LEARN HOW TO MAKE ONE OF THESE 3 RECIPES TODAY!
+            <div>
                 <p>Recipe Name: {this.props.data.name}</p>
                 <img src={this.props.data.image} alt={this.props.data.name}/> 
                 <p>Ingredients:</p>

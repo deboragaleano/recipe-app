@@ -12,7 +12,7 @@ class RecipeContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            recipe: []
+            recipe: null,
         }
         this.handleClick = this.handleClick.bind(this); 
     } 
@@ -32,10 +32,17 @@ class RecipeContainer extends Component {
     render() {
         return (
             <div>
-                {this.state.recipe.map(r => ( 
+                {/*TOGGLE THESE TEXT WHEN CLICKING THE BUTTON*/}
+                <h1>Want to make something new today?</h1>
+                <p>Check the button below to find out!</p>
+                {this.state.recipe && this.state.recipe.map(r => ( 
+                    <div>
+                    <h1>Choose one of these recipes!</h1>
                     <RecipeCard data={r} />
+                    </div>
                 ))}
-                <button onClick={this.handleClick}>Check other options!</button>
+                   {/*CHANGE TEXT OF BUTTON TO SEE DIFFERENT OPTIONS*/}
+                <button onClick={this.handleClick}>Click me!</button>
             </div>
             )
     }
