@@ -15,7 +15,7 @@ class RecipeCard extends Component {
                         </Badge>
                     </div>
                     <Card.Text className="text-secondary">
-                        {/*Break these lines into <li></li>*/}
+                        {/* TODO: Break these lines into <li></li>*/}
                     Ingredients: {this.props.data.ingredients.replace(/(\r\n|\n|\r)/gm,", ")}
                     </Card.Text>
                     <Button 

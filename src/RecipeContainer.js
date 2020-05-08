@@ -39,7 +39,7 @@ class RecipeContainer extends Component {
                     <Navbar.Brand href="#">Recipe App</Navbar.Brand>
                 </Navbar>
                 <Jumbotron>
-                {/*TOGGLE THESE TEXT WHEN CLICKING THE BUTTON*/}
+                {/*TODO: Toggle the titles when clicking the button*/}
                 <h1>Make a new recipe today!</h1>
                 <p>Learn how to cook something new. Check a random choice below! <FontAwesomeIcon icon={faThumbsUp}/></p>
                     <p>
