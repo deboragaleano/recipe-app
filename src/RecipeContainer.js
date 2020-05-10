@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import data from './data/data.json'; 
 import RecipeCard from "./RecipeCard"; 
 import {random} from './helpers';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
-import {Container, Row, Col, Button, Navbar, Jumbotron} from 'react-bootstrap'; 
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { 
+    Container, Row, Col, Button, 
+    Navbar, NavbarBrand, Jumbotron } from 'reactstrap';
 
 class RecipeContainer extends Component {
     static defaultProps = {
@@ -35,23 +37,25 @@ class RecipeContainer extends Component {
     render() {
         return (
             <Container>
-                <Navbar expand="lg" variant="dark" bg="dark">
-                    <Navbar.Brand href="#">Recipe App</Navbar.Brand>
+                <Navbar color="dark" dark expand="md">
+                    <NavbarBrand href="#">Recipe App</NavbarBrand>
                 </Navbar>
                 <Jumbotron>
                 {/*TODO: Toggle the titles when clicking the button*/}
-                <h1>Make a new recipe today!</h1>
-                <p>Learn how to cook something new. Check a random choice below! <FontAwesomeIcon icon={faThumbsUp}/></p>
+                <h1 className="display-3">Make a new recipe today!</h1>
+                <p className="lead">Learn how to cook something new. Check a random choice below! 
+                {/* <FontAwesomeIcon icon={faThumbsUp}/> */}
+                </p>
                     <p>
                     <Row>
                         {this.state.recipe && this.state.recipe.map(r => ( 
-                            <Col xs={4} className="mb-3" key={`${r.name}`}>
+                            <Col xs="4" key={`${r.name}`}>
                                 <RecipeCard data={r} />
                             </Col>
                         ))}
                     </Row>
                     <Button
-                        className='font-weight-bild'
+                        color='primary'
                         size='lg'
                         onClick={this.handleClick}>
                         Click me!
