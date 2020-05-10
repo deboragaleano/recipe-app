@@ -8,18 +8,11 @@ class RecipeCard extends Component {
         return(
             <Card body>
                 <div className="d-flex mb-2 justify-content-between">
-                    <CardTitle className="mb-0 font-weight-bold text-center">{this.props.data.name}</CardTitle>
+                    <CardTitle className="mb-0 font-weight-bold text-center">{this.props.title}</CardTitle>
                 </div>
-                <CardImg top width="100%" src={this.props.data.image} alt={this.props.data.name}/> 
-                <div className="card-text text-left">
-                    <strong>Ingredients:</strong>
-                    <ListGroup >
-                        {this.props.data.ingredients.split('\n').map((i, key) => (
-                        <ListGroupItem className="hidden" key={key}>{i}</ListGroupItem>))}
-                    </ListGroup>
-                </div>
+                <CardImg top width="100%" src={this.props.img} alt={this.props.title}/> 
                 <Button 
-                    href={this.props.data.url}
+                    // href={this.props.data.url}
                     target="_blank"
                 >
                 Learn more

@@ -1,41 +1,46 @@
 import React, { Component } from 'react'; 
-import data from './data/data.json'; 
 import RecipeCard from "./RecipeCard"; 
-import {random} from './helpers';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 
 import { 
     Container, Row, Col, Button, 
-    Navbar, NavbarBrand, Jumbotron } from 'reactstrap';
+    Navbar, NavbarBrand, Jumbotron,
+    Input, InputGroup, InputGroupAddon} from 'reactstrap';
 
 class RecipeContainer extends Component {
-    static defaultProps = {
-        recipes: data,
-        numRecipes: 3
-    }
-
     constructor(props) {
         super(props);
         this.state = {
-            recipe: null,   
-            isClicked: false
+            searchValue: '', 
+            meals: []
         }
-        this.handleClick = this.handleClick.bind(this); 
+        this.handleOnChange = this.handleOnChange.bind(this)
+        this.handleClick = this.handleClick.bind(this)
+        this.apiCall = this.apiCall.bind(this)
     } 
 
-    generate() {
-        let randomRecipes = Array.from({length: this.props.numRecipes}, () => random(this.props.recipes));
-        let UniqueRecipes = [...new Set(randomRecipes)]
+    handleOnChange(e) {
         this.setState({
-            recipe: UniqueRecipes,
-            isClicked: true
+            searchValue: e.target.value
         })
     }
 
     handleClick() {
-        this.generate()
+        this.apiCall(this.state.searchValue)
     }
+
+    apiCall(input) {
+        const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${input}`;
+        fetch(url)
+        .then(resp => {
+            return resp.json(); 
+        })
+        .then(data => {
+            this.setState({
+                meals: data.meals
+            })
+        })
+    }
+    
 
     render() {
         return (
@@ -47,22 +52,33 @@ class RecipeContainer extends Component {
                 <Jumbotron>
                     {!this.state.isClicked && <div>
                     <h1 className="display-3">Make a new recipe today!</h1>
-                    <p className="lead">Learn how to cook something new. Check a random choice below! <FontAwesomeIcon icon={faThumbsUp}/></p></div>}
-                    {this.state.isClicked && <h1>Pick one and start cookin'!</h1>}
-                    <Row>
-                        {this.state.recipe && this.state.recipe.map(r => ( 
-                            <Col xs="4" key={`${r.name}`}>
-                                <RecipeCard data={r} />
-                            </Col>
-                        ))}
-                    </Row>
+                    <p className="lead">Learn how to cook something new. Enter a meal below to find out!</p></div>}
 
-                    <Button
-                        color='primary'
-                        size='lg'
-                        onClick={this.handleClick}>
-                        Click me!
-                    </Button>
+                    <InputGroup size="md w-50 mx-auto">
+                        <Input 
+                            placeholder="Find a delicious meal!"
+                            onChange = {e => this.handleOnChange(e)}
+                            value = {this.state.searchValue}
+                        />
+                        <InputGroupAddon addonType="append">
+                        <Button
+                            color="primary"
+                            onClick={this.handleClick}>
+                                Search</Button>
+                        </InputGroupAddon>
+                    </InputGroup>
+
+                    {this.state.meals ? (
+                    <div>
+                    {this.state.meals.map((meal, index) => (
+                        <div key={index}>
+                    <RecipeCard title={meal.strMeal} img={meal.strMealThumb} />
+                    </div>
+                    ))}
+                    </div>
+                    ) : (
+                    <p>Try searching for a meal</p>
+                    )}
 
                 </Jumbotron>
             </Container>
@@ -72,3 +88,11 @@ class RecipeContainer extends Component {
 }
 
 export default RecipeContainer;  
+
+
+/**
+ * TODO: 
+ * - Search button, submit when pressing key enter
+ * - Change RecipeCard and add more information
+ * - Don't show all results but only about in a Column/Row 
+ */
