@@ -71,9 +71,9 @@ class RecipeContainer extends Component {
                     
                     {this.state.meals ? (
                     <Row>
-                        {this.state.meals.map((meal, index) => (
+                        {this.state.meals.slice(0, 3).map((meal, index) => (
                             <Col xs="4" key={index}>
-                                <RecipeCard title={meal.strMeal} img={meal.strMealThumb} />
+                                <RecipeCard data={meal} />
                             </Col>
                         ))}
                     </Row>
@@ -91,8 +91,9 @@ class RecipeContainer extends Component {
 export default RecipeContainer;  
 
 
+
 /**
  * TODO: 
- * - Change RecipeCard and add more information
- * - Don't show all results but only about in a Column/Row 
+ * - Show "find more <chicken> recipes CLICK BELOW THE RESULTS"
+ * 
  */
