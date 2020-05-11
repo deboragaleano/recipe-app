@@ -59,6 +59,7 @@ class RecipeContainer extends Component {
                             placeholder="Find a delicious meal!"
                             onChange = {e => this.handleOnChange(e)}
                             value = {this.state.searchValue}
+                            onKeyDown = {e => {if(e.key === 'Enter') {this.handleClick();}}}
                         />
                         <InputGroupAddon addonType="append">
                         <Button
@@ -92,7 +93,6 @@ export default RecipeContainer;
 
 /**
  * TODO: 
- * - Search button, submit when pressing key enter
  * - Change RecipeCard and add more information
  * - Don't show all results but only about in a Column/Row 
  */
