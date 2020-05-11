@@ -54,7 +54,7 @@ class RecipeContainer extends Component {
                     <h1 className="display-3">Make a new recipe today!</h1>
                     <p className="lead">Learn how to cook something new. Enter a meal below to find out!</p></div>}
 
-                    <InputGroup size="md w-50 mx-auto">
+                    <InputGroup size="md w-50 mx-auto my-3">
                         <Input 
                             placeholder="Find a delicious meal!"
                             onChange = {e => this.handleOnChange(e)}
@@ -68,19 +68,19 @@ class RecipeContainer extends Component {
                                 Search</Button>
                         </InputGroupAddon>
                     </InputGroup>
-
+                    
                     {this.state.meals ? (
-                    <div>
-                    {this.state.meals.map((meal, index) => (
-                        <div key={index}>
-                    <RecipeCard title={meal.strMeal} img={meal.strMealThumb} />
-                    </div>
-                    ))}
-                    </div>
-                    ) : (
-                    <p>Try searching for a meal</p>
-                    )}
-
+                    <Row>
+                        {this.state.meals.map((meal, index) => (
+                            <Col xs="4" key={index}>
+                                <RecipeCard title={meal.strMeal} img={meal.strMealThumb} />
+                            </Col>
+                        ))}
+                    </Row>
+                        ) : (
+                        <p>Try searching for a meal</p>
+                        )}
+                    
                 </Jumbotron>
             </Container>
             )
